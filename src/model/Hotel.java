@@ -27,13 +27,13 @@ public class Hotel {
 
         this.hotelId = "HTL-" + System.currentTimeMillis() % 100000;
         this.hotelName = hotelName;
-        this.city = city;
-        this.roomType = roomType;
+        this.roomType = (roomType != null) ? roomType : "Standard";
         this.rating = 0.0;
         this.numberOfNights = 1;
         this.haramView = false;
         this.amenities = new String[0];
-        setDistanceToHaram(starRating);
+        this.distanceToHaram = 0;
+        setCity(city);
         setPricePerNight(pricePerNight);
         setStarRating(starRating);
     }
@@ -84,7 +84,7 @@ public class Hotel {
 
     public String getDistanceDescription() {
         if (distanceToHaram <= 0) {
-            throw new IllegalArgumentException("Distance to Haram cannot be negative or zero");
+            return "Belirtimedi";
         }
         else if (distanceToHaram < 100) {
             return distanceToHaram + "m Çok Yakın (0-100m)";
@@ -113,6 +113,10 @@ public class Hotel {
     }
 
     public void setAmenities(String[] amenities) {
+        if (amenities == null) {
+            this.amenities = new String[0];
+            return;
+        }
         this.amenities = Arrays.copyOf(amenities, amenities.length);
     }
 
@@ -156,14 +160,11 @@ public class Hotel {
     }
 
     public void setCity(String city) {
-        if (hotelName == null || hotelName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Hotel name cannot be empty");
-        } else if (!(city.equals("Mekke") || city.equals("Medine"))) {
-            throw new IllegalArgumentException("City must be 'Mekke' or 'Medine' ");
-        } else if (city.equals(this.city)) {
-            throw new IllegalArgumentException("City is already set to " + city);
-        } else if (this.city != null || !this.city.isEmpty()) {
-            throw new IllegalArgumentException("City has already been set and cannot be changed");
+        if (city == null || city.trim().isEmpty()) {
+            throw new IllegalArgumentException("City cannot be empty");
+        } 
+        if (!(city.equals("Mekke") || city.equals("Medine"))) {
+            throw new IllegalArgumentException("City must be either 'Mekke' or 'Medine'");
         }
         this.city = city; 
     }
