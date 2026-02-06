@@ -160,6 +160,5 @@ public class VisitPlace {
                 ", isIncluded=" + isIncluded +
                 '}';
     }
-
     
 }
