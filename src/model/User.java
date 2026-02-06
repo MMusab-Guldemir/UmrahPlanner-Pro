@@ -159,14 +159,16 @@ public class User {
 
     public void setPassportNumber(String passportNumber) {
         if (passportNumber == null || passportNumber.trim().isEmpty()) {
-            throw new IllegalArgumentException("Passport number cannot be empty");
+            this.passportNumber = "";
+            return;
         }
         this.passportNumber = passportNumber;
     }
 
     public void setEmail(String email) {
         if (email == null || email.trim().isEmpty()) {
-            throw new IllegalArgumentException("Email cannot be empty");
+            this.email = "";
+            return;
         } else if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
             throw new IllegalArgumentException("Invalid email format");
         }
@@ -183,10 +185,18 @@ public class User {
     }
 
     public void setGender(String gender) {
+        if (gender == null || gender.trim().isEmpty()) {
+            this.gender = "";
+            return;
+        }
         this.gender = gender;
     }
 
     public void setNationality(String nationality) {
+        if (nationality == null || nationality.trim().isEmpty()) {
+            this.nationality = "TC";
+            return;
+        }
         this.nationality = nationality;
     }
 
@@ -198,7 +208,30 @@ public class User {
     }
 
     public void setSpecialNeeds(String specialNeeds) {
+        if (specialNeeds == null || specialNeeds.trim().isEmpty()) {
+            this.specialNeeds = "";
+            return;
+        }
         this.specialNeeds = specialNeeds;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        User other = (User) obj;
+        return userId != null && userId.equals(other.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return userId != null ? userId.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("User{id='%s', name='%s %s', tcNumber='%s', phone='%s'}",
+                userId, firstName, lastName, tcNumber, phoneNumber);
     }
 
     
