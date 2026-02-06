@@ -106,7 +106,7 @@ public class UmrahPackage {
 
     public void setPackageName(String packageName) {
         if (packageName == null || packageName.trim().isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Package name cannot be empty");
         }
         this.packageName = packageName;
     }
@@ -120,15 +120,15 @@ public class UmrahPackage {
     }
 
     public void setDuration(int duration) {
-        if (duration <= 0) {
-            throw new IllegalArgumentException();
+        if (duration < 1) {
+            throw new IllegalArgumentException("Duration must be at least 1 day");
         }
         this.duration = duration;
     }
 
     public void setBasePrice(double basePrice) {
-        if (basePrice < 0) {
-            throw new IllegalArgumentException();
+        if (basePrice <= 0) {
+            throw new IllegalArgumentException("Base price must be greater than 0");
         }
         this.basePrice = basePrice;
     }
@@ -138,7 +138,7 @@ public class UmrahPackage {
             this.includedVisitPlaces = new ArrayList<>();
             return;
         }
-        this.includedVisitPlaces = new ArrayList<>();
+        this.includedVisitPlaces = new ArrayList<>(places);
     }
 
     public void setHasVisa(boolean hasVisa) {
@@ -162,11 +162,30 @@ public class UmrahPackage {
         }
         includedVisitPlaces.remove(place);
     }
+    
+    public String getPackageSummary() {
+        return String.format("%s (%s) | %d gün | $%.2f | %d★ Otel | %s Uçuş | Rehber: %s",
+            packageName, packageType, duration, basePrice, 
+            includedHotelStars, includedFlightClass, 
+            hasGuide ? "Var" : "Yok");
+}
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        UmrahPackage other = (UmrahPackage) obj;
+        return packageId != null && packageId.equals(other.packageId);
+    }
 
     @Override
     public int hashCode() {
         return packageId != null ? packageId.hashCode() : 0;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return String.format("UmrahPackage{id='%s', name='%s', type='%s', duration=%d, price=%.2f}",
+                packageId, packageName, packageType, duration, basePrice);
+    }
 }
