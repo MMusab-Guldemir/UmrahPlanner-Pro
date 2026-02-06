@@ -12,7 +12,7 @@ public class Booking {
     private Flight outboundFlight;
     private Flight returnFlight;
     private Hotel makkahHotel;
-    private Hotel medinaHotel;
+    private Hotel madinahHotel;
     private List<VisitPlace> visitPlaces;
     private int numberOfTravelers;
     private LocalDate travelDate;
@@ -27,6 +27,16 @@ public class Booking {
     private LocalDateTime createdAt;
     private String notes;
 
+
+    public Booking(User user, int numberOfTravelers, LocalDate travelDate, Flight outboundFlight, Flight returnFlight, Hotel makkahHotel, Hotel madinahHotel) throws Exception {
+        if (user == null) {
+            throw new Exception("User can't be null");
+        }        
+        if (numberOfTravelers <= 0) {
+            throw new Exception("");
+        }
+
+    }
     
 
 }
