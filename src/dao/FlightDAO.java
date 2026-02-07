@@ -2,7 +2,6 @@ package src.dao;
 
 import src.model.Flight;
 import java.util.List;
-import java.lang.classfile.attribute.PermittedSubclassesAttribute;
 import java.util.ArrayList;
 
 
@@ -40,7 +39,28 @@ public class FlightDAO {
         flights.add(flight);
     }
 
-    public void update(Flight flight)
+    public void update(Flight flight) {
+        if (flight == null) {
+            throw new IllegalArgumentException();
+        }
+
+        for (Flight flight1 : flights) {
+            if (flight1.getFlightId().equals(flight.getFlightId())) {
+                flights.remove(flight1);
+                break;
+            }
+        }
+        save(flight);
+    }
+
+    public void delete(Flight flightId) {
+        if (flightId == null) {
+            throw new IllegalArgumentException();
+        }
+        flights.remove(flightId);
+    }
+
+
 
         
 }
