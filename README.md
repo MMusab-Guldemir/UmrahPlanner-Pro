@@ -486,3 +486,44 @@ public class Validator {
 **Başarılar! 🚀**
 
 *İlk hedef: Flight.java'yı yaz ve test et!*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------
+
+
+getAll() → new ArrayList<>(flights) döndür (defensive copy)
+getById() → for döngüsü ile listede gez, equals() ile karşılaştır
+save() → null kontrolü yap, sonra flights.add(flight)
+update() → önce getById() ile bul, sonra delete(), sonra save()
+delete() → removeIf() kullanabilirsin veya for döngüsü
+Filtreleme metodları → Yeni liste oluştur, for ile gez, uygun olanları ekle
+
+
+
+[ ] package ve import
+[ ] private List<Flight> flights
+[ ] Constructor
+[ ] getAll() - defensive copy
+[ ] getById(String id)
+[ ] save(Flight flight) - null kontrolü
+[ ] update(Flight flight)
+[ ] delete(String id)
+[ ] getByCity(String city)
+[ ] getByAirline(String airline)
+[ ] getByPriceRange(double min, double max)
