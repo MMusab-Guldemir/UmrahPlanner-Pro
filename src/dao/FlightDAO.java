@@ -68,7 +68,7 @@ public class FlightDAO {
 
     public List<Flight> getByCity(String city) {
         if (city == null || city.trim().isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("City cannot be null or empty");
         }
 
         List<Flight> result = new ArrayList<>();
@@ -84,7 +84,7 @@ public class FlightDAO {
 
     public List<Flight> getByAirline(String airline) {
         if (airline == null || airline.trim().isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Airline cannot be null or empty");
         }
 
         List<Flight> result = new ArrayList<>();
@@ -99,15 +99,13 @@ public class FlightDAO {
 
     public List<Flight> getByPriceRange(double min, double max) {
         if (min < 0 || max < 0 || min > max) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Invalid price range");
         }
 
         List<Flight> result = new ArrayList<>();
 
         for (Flight flight : flights) {
-            flight.getPrice();
-
-            if (flight.getPrice() >= min || flight.getPrice() <= max) {
+            if (flight.getPrice() >= min && flight.getPrice() <= max) {
                 result.add(flight);
             }
         }
