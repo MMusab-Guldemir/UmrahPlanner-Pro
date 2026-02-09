@@ -1,16 +1,11 @@
 package src.dao;
 
 import java.util.List;
-
-import javax.management.loading.PrivateClassLoader;
-
-import java.lang.classfile.TypeAnnotation.ThrowsTarget;
-import java.lang.classfile.constantpool.DoubleEntry;
 import java.util.ArrayList;
 import src.model.Hotel;
 
 public class HotelDAO {
-    List<Hotel> hotels;
+    private List<Hotel> hotels;
     
     public HotelDAO() {
         hotels = new ArrayList<>();
@@ -44,9 +39,9 @@ public class HotelDAO {
             throw new IllegalArgumentException("Hotel cannot be null");
         }
 
-        for (Hotel hotel1 : hotels) {
-            if (hotel1.getHotelId().equals(hotel.getHotelId())) {
-                hotels.remove(hotel);
+        for (Hotel exsiting : hotels) {
+            if (exsiting.getHotelId().equals(hotel.getHotelId())) {
+                hotels.remove(exsiting);
                 break;
             }
         } 
@@ -85,6 +80,10 @@ public class HotelDAO {
 
     public List<Hotel> getByStars(int stars) {
         List<Hotel> result = new ArrayList<>();
+
+        if (stars < 1 || stars > 5) {
+            throw new IllegalArgumentException("Stars must be between 1 and 5");
+        }
         for (Hotel hotel : hotels) {
             if (hotel.getStarRating() == stars) { 
                 result.add(hotel);
