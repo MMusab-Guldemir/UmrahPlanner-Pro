@@ -86,7 +86,7 @@ public class HotelDAO {
     public List<Hotel> getByStars(int stars) {
         List<Hotel> result = new ArrayList<>();
         for (Hotel hotel : hotels) {
-            if (hotel.getStarRating() == stars) {
+            if (hotel.getStarRating() == stars) { 
                 result.add(hotel);
             }
         }
