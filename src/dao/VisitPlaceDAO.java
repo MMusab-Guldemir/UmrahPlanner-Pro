@@ -17,7 +17,7 @@ public class VisitPlaceDAO {
 
     public VisitPlace getById(String id) {
         if (id == null || id.trim().isEmpty()) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("ID cannot be null or empty");
         }
 
         for (VisitPlace visitPlace : places) {
@@ -30,14 +30,14 @@ public class VisitPlaceDAO {
 
     public void save(VisitPlace place) {
         if (place == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("VisitPlace cannot be null");
         }
         places.add(place);
     }
 
     public void update(VisitPlace place) {
         if (place == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("VisitPlace cannot be null");
         }
 
         for (VisitPlace visitPlace : places) {
@@ -51,7 +51,7 @@ public class VisitPlaceDAO {
 
     public void delete(String id) {
         if (id == null || id.trim().isEmpty()) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("ID cannot be null or empty");
         }
 
 
@@ -66,7 +66,7 @@ public class VisitPlaceDAO {
 
     public List<VisitPlace> getByCity(String city) {
         if (city == null || city.trim().isEmpty()) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("City cannot be null or empty");
         }
 
         List<VisitPlace> result = new ArrayList<>();
@@ -81,7 +81,7 @@ public class VisitPlaceDAO {
 
     public List<VisitPlace> getByImportance(String importance) {
         if (importance == null || importance.trim().isEmpty()) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Importance cannot be null or empty");
         }
 
         List<VisitPlace> result = new ArrayList<>();
@@ -96,7 +96,7 @@ public class VisitPlaceDAO {
     
     public List<VisitPlace> getByType(String type) {
         if (type == null || type.trim().isEmpty()) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Type cannot be null or empty");
         }
 
         List<VisitPlace> result = new ArrayList<>();
