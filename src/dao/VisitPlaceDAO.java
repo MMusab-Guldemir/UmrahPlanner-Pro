@@ -2,17 +2,17 @@ package src.dao;
 
 import java.util.List;
 import java.util.ArrayList;
-import src.model.VisitPlace;;
+import src.model.VisitPlace;
 public class VisitPlaceDAO {
     
-    private List<VisitPlace> field;
+    private List<VisitPlace> places;
 
     public VisitPlaceDAO() {
-        this.field = new ArrayList<>();
+        this.places = new ArrayList<>();
     }
 
     public List<VisitPlace> getAll() {
-        return new ArrayList<>(field);
+        return new ArrayList<>(places);
     }   
 
     public VisitPlace getById(String id) {
@@ -20,7 +20,7 @@ public class VisitPlaceDAO {
             throw new IllegalArgumentException("");
         }
 
-        for (VisitPlace visitPlace : field) {
+        for (VisitPlace visitPlace : places) {
             if (visitPlace.getPlaceId().equals(id)) {
                 return visitPlace;
             }
@@ -32,7 +32,7 @@ public class VisitPlaceDAO {
         if (place == null) {
             throw new IllegalArgumentException();
         }
-        field.add(place);
+        places.add(place);
     }
 
     public void update(VisitPlace place) {
@@ -40,9 +40,9 @@ public class VisitPlaceDAO {
             throw new IllegalArgumentException();
         }
 
-        for (VisitPlace visitPlace : field) {
+        for (VisitPlace visitPlace : places) {
             if (visitPlace.getPlaceId().equals(place.getPlaceId())) {
-                field.remove(field);
+                places.remove(visitPlace);
                 break;
             }
         }
@@ -54,14 +54,72 @@ public class VisitPlaceDAO {
             throw new IllegalArgumentException("");
         }
 
-        for (VisitPlace visitPlace : field) {
+
+
+        for (VisitPlace visitPlace : places) {
             if (visitPlace.getPlaceId().equals(id)) {
-                field.remove(field);
+                places.remove(visitPlace);
                 break;
             }
         }
     }
+
+    public VisitPlace getByCity(String city) {
+        if (city == null || city.trim().isEmpty()) {
+            throw new IllegalArgumentException("");
+        }
+
+        List<VisitPlace> result = new ArrayList<>();
+
+        for (VisitPlace visitPlace : places) {
+            if (visitPlace.getCity().equalsIgnoreCase(city)) {
+                result.add(visitPlace);
+            }
+        }
+        return null;
+    }
+
+    public VisitPlace getByImportance(String importance) {
+        if (importance == null || importance.trim().isEmpty()) {
+            throw new IllegalArgumentException("");
+        }
+
+        List<VisitPlace> result = new ArrayList<>();
+
+        for (VisitPlace visitPlace : places) {
+            if (visitPlace.getImportance().equalsIgnoreCase(importance)) {
+                result.add(visitPlace);
+            }
+        }
+        return null;
+    }
     
+    public VisitPlace getByType(String type) {
+        if (type == null || type.trim().isEmpty()) {
+            throw new IllegalArgumentException("");
+        }
+
+        List<VisitPlace> result = new ArrayList<>();
+
+        for (VisitPlace visitPlace : places) {
+            if (visitPlace.getType().equalsIgnoreCase(type)) {
+                result.add(visitPlace);
+            }
+        }
+        return null;
+    }
+
+    public VisitPlace getInculeded() {
+
+        List<VisitPlace> result = new ArrayList<>();
+
+        for (VisitPlace visitPlace : places) {
+            if (visitPlace.isIncluded()) {
+                result.add(visitPlace);
+            }
+        }
+        return null;
+    }
     
 
 }
