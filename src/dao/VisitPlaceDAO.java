@@ -64,7 +64,7 @@ public class VisitPlaceDAO {
         }
     }
 
-    public VisitPlace getByCity(String city) {
+    public List<VisitPlace> getByCity(String city) {
         if (city == null || city.trim().isEmpty()) {
             throw new IllegalArgumentException("");
         }
@@ -76,10 +76,10 @@ public class VisitPlaceDAO {
                 result.add(visitPlace);
             }
         }
-        return null;
+        return result;
     }
 
-    public VisitPlace getByImportance(String importance) {
+    public List<VisitPlace> getByImportance(String importance) {
         if (importance == null || importance.trim().isEmpty()) {
             throw new IllegalArgumentException("");
         }
@@ -91,10 +91,10 @@ public class VisitPlaceDAO {
                 result.add(visitPlace);
             }
         }
-        return null;
+        return result;
     }
     
-    public VisitPlace getByType(String type) {
+    public List<VisitPlace> getByType(String type) {
         if (type == null || type.trim().isEmpty()) {
             throw new IllegalArgumentException("");
         }
@@ -106,10 +106,10 @@ public class VisitPlaceDAO {
                 result.add(visitPlace);
             }
         }
-        return null;
+        return result;
     }
 
-    public VisitPlace getInculeded() {
+    public List<VisitPlace> getIncluded() {
 
         List<VisitPlace> result = new ArrayList<>();
 
@@ -118,7 +118,7 @@ public class VisitPlaceDAO {
                 result.add(visitPlace);
             }
         }
-        return null;
+        return result;
     }
     
 
