@@ -12,7 +12,7 @@ public class VisitPlaceDAO {
     }
 
     public void getAll() {
-        
-    }
+
+    }   
     
 }
