@@ -84,21 +84,27 @@ public class BookingDAO {
             throw new IllegalArgumentException("Status cannot be null or empty");
         }
 
+        List<Booking> result = new ArrayList<>();
+
         for (Booking booking : bookings) {
             if (booking.getStatus().equalsIgnoreCase(status)) {
-
+                result.add(booking);
             }
         }
-        return null;
+        return result;
     }
 
-    public List getByDateRange(LocalDate start, LocalDate end) {
-        if (start == null || end == null) {
+    public List<Booking> getByDateRange(LocalDate start, LocalDate end) {
+        if (start == null ) {
             throw new IllegalArgumentException("Start date cannot be null");
         }
 
-        if (start.isAfter(end)) {
+        if (end == null) {
             throw new IllegalArgumentException("End date cannot be null");
+        }
+
+        if (start.isAfter(end)) {
+            throw new IllegalArgumentException("Start date cannot be after end date");
         }
 
         List<Booking> result = new ArrayList<>();
@@ -107,12 +113,11 @@ public class BookingDAO {
             LocalDate travelDate = booking.getTravelDate();
 
             if (!travelDate.isBefore(start) && !travelDate.isAfter(end)) {
-                throw new IllegalArgumentException("Start date cannot be after end date");
+                result.add(booking);
             }
-            result.add(booking);
         }
 
-        return null;
+        return result;
     }
 
 
