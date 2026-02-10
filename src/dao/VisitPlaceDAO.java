@@ -11,9 +11,57 @@ public class VisitPlaceDAO {
         this.field = new ArrayList<>();
     }
 
-    public void getAll() {
-
+    public List<VisitPlace> getAll() {
+        return new ArrayList<>(field);
     }   
+
+    public VisitPlace getById(String id) {
+        if (id == null || id.trim().isEmpty()) {
+            throw new IllegalArgumentException("");
+        }
+
+        for (VisitPlace visitPlace : field) {
+            if (visitPlace.getPlaceId().equals(id)) {
+                return visitPlace;
+            }
+        }
+        return null;
+    }
+
+    public void save(VisitPlace place) {
+        if (place == null) {
+            throw new IllegalArgumentException();
+        }
+        field.add(place);
+    }
+
+    public void update(VisitPlace place) {
+        if (place == null) {
+            throw new IllegalArgumentException();
+        }
+
+        for (VisitPlace visitPlace : field) {
+            if (visitPlace.getPlaceId().equals(place.getPlaceId())) {
+                field.remove(field);
+                break;
+            }
+        }
+        save(place);
+    }
+
+    public void delete(String id) {
+        if (id == null || id.trim().isEmpty()) {
+            throw new IllegalArgumentException("");
+        }
+
+        for (VisitPlace visitPlace : field) {
+            if (visitPlace.getPlaceId().equals(id)) {
+                field.remove(field);
+                break;
+            }
+        }
+    }
     
     
+
 }
