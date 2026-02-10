@@ -88,7 +88,7 @@ public class UserDAO {
                 result.add(user);
             }
         }
-        return users;
+        return result;
     }
 
     public List<User> getByNationality(String nationality) {
@@ -103,9 +103,9 @@ public class UserDAO {
                 result.add(user);
             }
         }
-        return users;
+        return result;
     }
 
-    
+
 
 }
