@@ -18,7 +18,7 @@ public class UserDAO {
 
     public User getById(String id) {
         if (id == null || id.trim().isEmpty()) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("ID cannot be null or empty");
         }
 
         for (User user : users) {
@@ -31,14 +31,14 @@ public class UserDAO {
 
     public void save(User user) {
         if (user == null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("User cannot be null");
         }
         users.add(user);
     }
 
     public void update(User user) {
         if (user == null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("User cannot be null");
         }
 
         for (User user1 : users) {
@@ -52,7 +52,7 @@ public class UserDAO {
 
     public void delete(String id) {
         if (id == null || id.trim().isEmpty()) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("ID cannot be null or empty");
         }
         
         for (User user : users) {
@@ -65,7 +65,7 @@ public class UserDAO {
 
     public User getByTcNumber(String tc) {
         if (tc == null || tc.trim().isEmpty()) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("TC Number cannot be null or empty");
         }
 
         for (User user : users) {
@@ -78,7 +78,7 @@ public class UserDAO {
 
     public List<User> getByFullName(String name) {
         if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Name cannot be null or empty");
         }
 
         List<User> result = new ArrayList<>();
@@ -92,8 +92,8 @@ public class UserDAO {
     }
 
     public List<User> getByNationality(String nationality) {
-        if (nationality == null || nationality.trim().isEmpty()) {
-            throw new IllegalArgumentException("");
+        if (nationality == null || nationality.trim().isEmpty()) { 
+            throw new IllegalArgumentException("Nationality cannot be null or empty");
         }
 
         List<User> result = new ArrayList<>();
