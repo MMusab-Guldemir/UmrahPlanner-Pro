@@ -5,22 +5,22 @@ import java.util.List;
 import java.util.ArrayList;
 public class UmrahPackageDAO {
     
-    private List<UmrahPackage> umrahPackages;
+    private List<UmrahPackage> packages;
 
     public UmrahPackageDAO() {
-        this.umrahPackages = new ArrayList<>();
+        this.packages = new ArrayList<>();
     }
 
     public List<UmrahPackage> getAll() {
-        return new ArrayList<>(umrahPackages);
+        return new ArrayList<>(packages);
     }
 
     public UmrahPackage getById(String id) {
         if (id == null || id.trim().isEmpty()) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("ID cannot be null or empty");
         }
 
-        for (UmrahPackage umrahPackage : umrahPackages) {
+        for (UmrahPackage umrahPackage : packages) {
             if (umrahPackage.getPackageId().equals(id)) {
                 return umrahPackage;
             }
@@ -30,19 +30,20 @@ public class UmrahPackageDAO {
 
     public void save(UmrahPackage pkg) {
         if (pkg == null) { 
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("UmrahPackage cannot be null");
         }
-        umrahPackages.add(pkg);
+        packages.add(pkg);
     } 
 
     public void update(UmrahPackage pkg) {
         if (pkg == null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("UmrahPackage cannot be null");
         }
 
-        for (UmrahPackage umrahPackage : umrahPackages) {
+        for (UmrahPackage umrahPackage : packages) {
             if (umrahPackage.getPackageId().equals(pkg.getPackageId())) {
-                umrahPackages.remove(umrahPackage);
+                packages.remove(umrahPackage);
+                break;
             }
         }
         save(pkg);
@@ -50,15 +51,70 @@ public class UmrahPackageDAO {
 
     public void delete(String id) {
         if (id == null || id.trim().isEmpty()) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("ID cannot be null or empty");
         }
 
-        for (UmrahPackage umrahPackage : umrahPackages) {
+        for (UmrahPackage umrahPackage : packages) {
             if (umrahPackage.getPackageId().equals(id)) {
-                umrahPackages.remove(umrahPackage);
+                packages.remove(umrahPackage);
                 break;
             }
         }        
     }
+
+    public List<UmrahPackage> getByType(String type) {
+        if (type == null || type.trim().isEmpty()) {
+            throw new IllegalArgumentException("Package type cannot be null or empty");
+        }
+
+        List<UmrahPackage> result = new ArrayList<>();
+
+        for (UmrahPackage umrahPackage : packages) {
+            if (umrahPackage.getPackageType().equalsIgnoreCase(type)) {
+                result.add(umrahPackage);
+            }
+        }
+        return result;
+    }
+
+    public List<UmrahPackage> getByPriceRange(double min, double max) {
+        if (min < 0 || max < 0) { 
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+        if (min > max) {
+            throw new IllegalArgumentException("Min price cannot be greater than max");
+        }
+        List<UmrahPackage> result = new ArrayList<>();
+
+        for (UmrahPackage umrahPackage : packages) {
+            if (umrahPackage.getBasePrice() >= min) {
+                if (umrahPackage.getBasePrice() <= max) {
+                    result.add(umrahPackage);
+                }
+            }
+        }
+        return result;
+    }
+
+    public List<UmrahPackage> getByDuration(int minDays, int maxDays) {
+        if (minDays < 1) {
+            throw new IllegalArgumentException("Min days must be at least 1");
+        }
+        if (minDays > maxDays) {
+            throw new IllegalArgumentException("Min days cannot be greater than max days");
+        }
+
+        List<UmrahPackage> result = new ArrayList<>();
+
+        for (UmrahPackage umrahPackage : packages) {
+            if (umrahPackage.getDuration() >= minDays) {
+                if (umrahPackage.getDuration() <= maxDays) {
+                    result.add(umrahPackage);
+                }
+            }
+        }
+        return null;
+    }
+
 }
  
