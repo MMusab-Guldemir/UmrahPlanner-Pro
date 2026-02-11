@@ -29,7 +29,7 @@ public class UmrahPackageDAO {
     }
 
     public void save(UmrahPackage pkg) {
-        if (pkg == null) {
+        if (pkg == null) { 
             throw new IllegalArgumentException("");
         }
         umrahPackages.add(pkg);
