@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.ArrayList;
 public class UmrahPackageDAO {
     
-    private List<UmrahPackage> UmrahPackages;
+    private List<UmrahPackage> umrahPackages;
 
     public UmrahPackageDAO() {
-        this.UmrahPackages = new ArrayList<>();
+        this.umrahPackages = new ArrayList<>();
     }
 
     public List<UmrahPackage> getAll() {
-        return new ArrayList<>(UmrahPackages);
+        return new ArrayList<>(umrahPackages);
     }
 
     public UmrahPackage getById(String id) {
@@ -20,7 +20,7 @@ public class UmrahPackageDAO {
             throw new IllegalArgumentException("");
         }
 
-        for (UmrahPackage umrahPackage : UmrahPackages) {
+        for (UmrahPackage umrahPackage : umrahPackages) {
             if (umrahPackage.getPackageId().equals(id)) {
                 return umrahPackage;
             }
@@ -32,7 +32,7 @@ public class UmrahPackageDAO {
         if (pkg == null) {
             throw new IllegalArgumentException("");
         }
-        UmrahPackages.add(pkg);
+        umrahPackages.add(pkg);
     } 
 
     public void update(UmrahPackage pkg) {
@@ -40,9 +40,9 @@ public class UmrahPackageDAO {
             throw new IllegalArgumentException("");
         }
 
-        for (UmrahPackage umrahPackage : UmrahPackages) {
+        for (UmrahPackage umrahPackage : umrahPackages) {
             if (umrahPackage.getPackageId().equals(pkg.getPackageId())) {
-                UmrahPackages.remove(pkg);
+                umrahPackages.remove(umrahPackage);
             }
         }
         save(pkg);
@@ -53,9 +53,10 @@ public class UmrahPackageDAO {
             throw new IllegalArgumentException("");
         }
 
-        for (UmrahPackage umrahPackage : UmrahPackages) {
+        for (UmrahPackage umrahPackage : umrahPackages) {
             if (umrahPackage.getPackageId().equals(id)) {
-                UmrahPackages.remove(UmrahPackages);
+                umrahPackages.remove(umrahPackage);
+                break;
             }
         }        
     }
