@@ -87,10 +87,8 @@ public class UmrahPackageDAO {
         List<UmrahPackage> result = new ArrayList<>();
 
         for (UmrahPackage umrahPackage : packages) {
-            if (umrahPackage.getBasePrice() >= min) {
-                if (umrahPackage.getBasePrice() <= max) {
+            if (umrahPackage.getBasePrice() >= min && umrahPackage.getBasePrice() <= max) {
                     result.add(umrahPackage);
-                }
             }
         }
         return result;
@@ -113,7 +111,7 @@ public class UmrahPackageDAO {
                 }
             }
         }
-        return null;
+        return result;
     }
 
 }
