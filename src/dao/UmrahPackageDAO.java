@@ -33,7 +33,7 @@ public class UmrahPackageDAO {
             throw new IllegalArgumentException("");
         }
         UmrahPackages.add(pkg);
-    }
+    } 
 
     public void update(UmrahPackage pkg) {
         if (pkg == null) {
