@@ -1,5 +1,7 @@
 package src.service;
 import src.model.Flight;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import src.dao.FlightDAO;;
@@ -41,5 +43,33 @@ public class FlightService {
 
     public List<Flight> getAllFlights() {
         return flightDAO.getAll();
+    }
+
+    public List<Flight> findByCity(String city) {
+        return flightDAO.getByCity(city);
+    }
+
+    public List<Flight> findByAirline(String airline) {
+        return flightDAO.getByAirline(airline);
+    }
+
+    public List<Flight> findByPriceRange(double min, double max) {
+        return flightDAO.getByPriceRange(min, max);
+    }
+     
+    public int getFlightCount() {
+        return flightDAO.getAll().size();
+    }
+
+    public List<Flight> getAvailableFlights() {
+        flightDAO.getAll();
+        Flight flights = new Flight(null, null, null, getFlightCount());
+        List<Flight> result = new ArrayList<>();
+
+        if (flights.getAvailableSeats() > 0) {
+            result.add(flights);
+        }
+
+        return result;
     }
 }
