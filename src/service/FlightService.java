@@ -41,7 +41,7 @@ public class FlightService {
         flightDAO.delete(id);
     }
 
-    public List<Flight> getAllFlights() {
+    public List<Flight> getAllflightDAO() {
         return flightDAO.getAll();
     }
 
@@ -62,14 +62,14 @@ public class FlightService {
     }
 
     public List<Flight> getAvailableFlights() {
-        flightDAO.getAll();
-        Flight flights = new Flight(null, null, null, getFlightCount());
+        List<Flight> allFlights = flightDAO.getAll();
         List<Flight> result = new ArrayList<>();
 
-        if (flights.getAvailableSeats() > 0) {
-            result.add(flights);
+        for (Flight flight : allFlights) {
+            if (flight.getAvailableSeats() > 0) {
+                result.add(flight);
+            }
         }
-
         return result;
     }
 }
