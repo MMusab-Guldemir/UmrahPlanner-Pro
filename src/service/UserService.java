@@ -94,7 +94,7 @@ public class UserService {
         if (user.getLastName() == null || user.getLastName().trim().isEmpty()) {
             return false;
         }
-        if (user.getTcNumber().length() != 11)  {
+        if (user.getTcNumber() == null || user.getTcNumber().length() != 11)  {
             return false;
         }
         if (user.getPhoneNumber() == null || user.getPhoneNumber().trim().isEmpty()) {
