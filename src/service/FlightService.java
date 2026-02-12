@@ -14,28 +14,28 @@ public class FlightService {
 
     public void addFlight(Flight flight) {
         if (flight == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Flight cannot be null");
         }
         flightDAO.save(flight);
     }
 
     public void updateFlight(Flight flight) {
         if (flight == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Flight cannot be null");
         }
         if (flightDAO.getById(flight.getFlightId()) == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Flight not found with id: " + flight.getFlightId());
         }
         flightDAO.update(flight);
     } 
 
     public void deleteFlight(String id ){
         if (id == null || id.trim().isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Flight ID cannot be null or empty");
         }
         Flight existing = flightDAO.getById(id);
         if (existing == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Flight not found with id: " + id);
         }
 
         flightDAO.delete(id);
@@ -48,7 +48,7 @@ public class FlightService {
     public Flight getById(String id) {
         Flight existing = flightDAO.getById(id);
         if (existing == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Flight not found with id: " + id);
         }
         return existing;
     }
