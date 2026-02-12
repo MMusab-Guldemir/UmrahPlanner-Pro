@@ -13,18 +13,18 @@ public class HotelService {
 
     public void addHotel(Hotel hotel) {
         if (hotel == null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Hotel cannot be null");
         }
         hotelDAO.save(hotel);
     }
 
     public void updateHotel(Hotel hotel) {
         if (hotel == null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Hotel not found with id: " + hotel.getHotelId());
         }
         Hotel existing = hotelDAO.getById(hotel.getHotelId());
         if (existing == null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Hotel not found with id: " + hotel.getHotelId());
         }
         hotelDAO.update(hotel);
 
@@ -32,12 +32,12 @@ public class HotelService {
 
     public void deleteHotel(String id) {
         if (id == null || id.trim().isEmpty()) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Hotel ID cannot be null or empty");
         }
         Hotel existing = hotelDAO.getById(id);
 
         if (existing == null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Hotel not found with id: " + id);
         }
 
         hotelDAO.delete(id);
@@ -46,7 +46,7 @@ public class HotelService {
     public Hotel getHotelById(String id) {
         Hotel existing = hotelDAO.getById(id);
         if (existing == null) { 
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Hotel not found with id: " + id);
         }
         return existing;
     }
@@ -67,5 +67,15 @@ public class HotelService {
         return hotelDAO.getByPriceRange(min, max);
     }
 
+    public List<Hotel> getMakkahHotels() {
+        return hotelDAO.getByCity("Mekke");
+    }
 
+    public List<Hotel> getMadinahHotels() {
+        return hotelDAO.getByCity("Medine");
+    }
+
+    public int getHotelCount() {
+        return hotelDAO.getAll().size();
+    }
 }
