@@ -3,8 +3,8 @@ import src.model.Flight;
 
 import java.util.ArrayList;
 import java.util.List;
+import src.dao.FlightDAO;
 
-import src.dao.FlightDAO;;
 public class FlightService {
     private FlightDAO flightDAO;
 
@@ -41,8 +41,16 @@ public class FlightService {
         flightDAO.delete(id);
     }
 
-    public List<Flight> getAllflightDAO() {
+    public List<Flight> getAllflights() {
         return flightDAO.getAll();
+    }
+
+    public Flight getById(String id) {
+        Flight existing = flightDAO.getById(id);
+        if (existing == null) {
+            throw new IllegalArgumentException();
+        }
+        return existing;
     }
 
     public List<Flight> findByCity(String city) {

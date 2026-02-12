@@ -44,7 +44,7 @@ public class HotelDAO {
                 hotels.remove(exsiting);
                 break;
             }
-        } 
+        }
         save(hotel);
     }
 
