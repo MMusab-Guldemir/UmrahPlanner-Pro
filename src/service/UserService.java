@@ -13,13 +13,13 @@ public class UserService {
 
     public void registerUser(User user) {
         if (user == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("User cannot be null");
         }
 
         User existing = userDAO.getByTcNumber(user.getTcNumber());
 
         if (existing != null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("User with this TC number already exists");
         }
 
         userDAO.save(user);
@@ -27,26 +27,26 @@ public class UserService {
 
     public void updateUser(User user) {
         if (user == null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("User cannot be null");
         }
         
         User existing = userDAO.getById(user.getUserId());
         
         if (existing == null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("User not found with id: " + user.getUserId());
         }
         userDAO.update(user);
     }
 
     public void deleteUser(String id) {
         if (id == null || id.trim().isEmpty()) {
-            throw new IllegalArgumentException(""); 
+            throw new IllegalArgumentException("User ID cannot be null or empty"); 
         }
 
         User existing = userDAO.getById(id);
 
         if (existing == null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("User not found with id: " + id);
         }
 
         userDAO.delete(id);
@@ -55,7 +55,7 @@ public class UserService {
     public User getUserById(String id) {
         User existing = userDAO.getById(id);
         if (existing == null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("User not found with id: " + id);
         }
         return existing;
     }
@@ -88,10 +88,10 @@ public class UserService {
         if (user == null) {
             return false;
         }
-        if (user.getFirstName() == null) {
+        if (user.getFirstName() == null ||user.getFirstName().trim().isEmpty()) {
             return false;
         }
-        if (user.getLastName() == null) {
+        if (user.getLastName() == null || user.getLastName().trim().isEmpty()) {
             return false;
         }
         if (user.getTcNumber().length() != 11)  {
