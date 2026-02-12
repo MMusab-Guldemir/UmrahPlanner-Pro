@@ -1,7 +1,6 @@
 package src.service;
 import src.model.User;
 import src.dao.UserDAO;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,7 +25,7 @@ public class UserService {
         userDAO.save(user);
     }
 
-    public User updateUser(User user) {
+    public void updateUser(User user) {
         if (user == null) {
             throw new IllegalArgumentException("");
         }
@@ -37,10 +36,9 @@ public class UserService {
             throw new IllegalArgumentException("");
         }
         userDAO.update(user);
-        return existing;        
     }
 
-    public User deleteUser(String id) {
+    public void deleteUser(String id) {
         if (id == null || id.trim().isEmpty()) {
             throw new IllegalArgumentException(""); 
         }
@@ -52,7 +50,6 @@ public class UserService {
         }
 
         userDAO.delete(id);
-        return existing;
     }
 
     public User getUserById(String id) {
@@ -75,8 +72,40 @@ public class UserService {
         return userDAO.getByFullName(name);
     }
 
-    public List<User> findBBByNationality(String nationality) {
+    public List<User> findByNationality(String nationality) {
         return userDAO.getByNationality(nationality);
+    }
+
+    public boolean isUserExists(String tcNumber)  {
+        User existing = userDAO.getByTcNumber(tcNumber);
+        if (existing != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public void getUserCount() {
+        userDAO.getAll().size();
+    }
+
+    public boolean validateUser(User user) {
+        if (user == null) {
+            return false;
+        }
+        if (user.getFirstName() == null) {
+            return false;
+        }
+        if (user.getLastName() == null) {
+            return false;
+        }
+        if (user.getTcNumber() != 11) {
+            return false;
+        }
+        if (user.getPhoneNumber() == null || user.getPhoneNumber().trim().isEmpty()) {
+            return false;
+        }
+
+        return true;
     }
 
 }
