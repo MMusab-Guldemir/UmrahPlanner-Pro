@@ -2,6 +2,7 @@ package src.service;
 
 import src.model.Flight;
 import src.model.Hotel;
+import src.model.UmrahPackage;
 
 public class PriceCalculator {
     private static final double VISA_FEE = 150.0;
@@ -50,5 +51,10 @@ public class PriceCalculator {
         return INSURANCE_FEE * travelers;
     }
 
-
+    public static double calculatePackagePrice(UmrahPackage pkg, int travelers) {
+        if (pkg == null) {
+            throw new IllegalArgumentException();
+        }
+        
+    }
 }
