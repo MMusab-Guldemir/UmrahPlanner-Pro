@@ -48,7 +48,7 @@ public class FlightService {
     public Flight getById(String id) {
         Flight existing = flightDAO.getById(id);
         if (existing == null) {
-            throw new IllegalArgumentException("Flight not found with id: " + id);
+            throw new IllegalArgumentException("Flight not found with id: " + id); 
         }
         return existing;
     }
