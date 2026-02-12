@@ -77,15 +77,11 @@ public class UserService {
     }
 
     public boolean isUserExists(String tcNumber)  {
-        User existing = userDAO.getByTcNumber(tcNumber);
-        if (existing != null) {
-            return true;
-        }
-        return false;
+        return userDAO.getByTcNumber(tcNumber) != null;
     }
 
-    public void getUserCount() {
-        userDAO.getAll().size();
+    public int getUserCount() {
+        return userDAO.getAll().size();
     }
 
     public boolean validateUser(User user) {
@@ -98,7 +94,7 @@ public class UserService {
         if (user.getLastName() == null) {
             return false;
         }
-        if (user.getTcNumber() != 11) {
+        if (user.getTcNumber().length() != 11)  {
             return false;
         }
         if (user.getPhoneNumber() == null || user.getPhoneNumber().trim().isEmpty()) {
