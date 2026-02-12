@@ -20,7 +20,7 @@ public class HotelService {
 
     public void updateHotel(Hotel hotel) {
         if (hotel == null) {
-            throw new IllegalArgumentException("Hotel not found with id: " + hotel.getHotelId());
+            throw new IllegalArgumentException("Hotel cannot be null");
         }
         Hotel existing = hotelDAO.getById(hotel.getHotelId());
         if (existing == null) {
