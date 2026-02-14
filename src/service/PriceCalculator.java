@@ -39,7 +39,7 @@ public class PriceCalculator {
 
     public static double calculateVisaFee(int travelers, boolean hasVisa) {
         if (hasVisa == false) {
-            return 0;
+            return 0; 
         }
         return VISA_FEE * travelers;
     }
