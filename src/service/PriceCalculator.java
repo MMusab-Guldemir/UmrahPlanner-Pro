@@ -29,7 +29,7 @@ public class PriceCalculator {
 
         return hotel.getTotalPrice() * travelers;
     }
- 
+
     public static double calculateGuideFee(int duration, boolean hasGuide) {
         if (hasGuide == false) {
             return 0;
@@ -39,7 +39,7 @@ public class PriceCalculator {
 
     public static double calculateVisaFee(int travelers, boolean hasVisa) {
         if (hasVisa == false) {
-            return 0; 
+            return 0;
         }
         return VISA_FEE * travelers;
     }
@@ -53,8 +53,9 @@ public class PriceCalculator {
 
     public static double calculatePackagePrice(UmrahPackage pkg, int travelers) {
         if (pkg == null) {
-            throw new IllegalArgumentException(); 
+            throw new IllegalArgumentException();
         }
+        return travelers;
         
     }
 }
