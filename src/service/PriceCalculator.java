@@ -29,7 +29,7 @@ public class PriceCalculator {
 
         return hotel.getTotalPrice() * travelers;
     }
-
+ 
     public static double calculateGuideFee(int duration, boolean hasGuide) {
         if (hasGuide == false) {
             return 0;
