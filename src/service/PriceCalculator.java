@@ -53,7 +53,7 @@ public class PriceCalculator {
 
     public static double calculatePackagePrice(UmrahPackage pkg, int travelers) {
         if (pkg == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(); 
         }
         
     }
