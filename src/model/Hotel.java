@@ -41,7 +41,7 @@ public class Hotel {
     public String getHotelId() {
         return hotelId;
     }
-
+ 
     public String getHotelName() {
         return hotelName;
     }
