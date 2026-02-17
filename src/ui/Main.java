@@ -1,13 +1,10 @@
 package src.ui;
+import src.model.User;
 import src.service.BookingService;
 import src.service.FlightService;
 import src.service.HotelService;
 import src.service.UserService;
-
-import java.lang.Thread.State;
 import java.util.Scanner;
-
-import src.dao.*;
 public class Main {
     private UserService userService;
     private HotelService hotelService;
@@ -26,11 +23,12 @@ public class Main {
 
     public static void main(String[] args) {
         Main program = new Main();
+        program.run();
     }
 
     public void run() {
         while (true) {
-
+            showMainMenu();
         }
     }
 
@@ -47,8 +45,8 @@ public class Main {
 
         switch (choice) {
             case 1:
+                showUserMenu();
                 break;
-
             case 2:
                 break;
 
@@ -59,7 +57,7 @@ public class Main {
                 break;
 
             case 5:
-                System.out.println("Güle güle!");
+                System.exit(0);
                 break;
         }
     }
@@ -87,9 +85,31 @@ public class Main {
                 break;
 
             case 5:
-                System.out.println("Güle güle!");
                 break;
         }
+    }
+
+    public void addUser() {
+        System.out.println("Ad girin: ");
+        String name = scanner.nextLine();
+
+        System.out.println("Soyad girin: ");
+        String surName = scanner.nextLine();
+
+        System.out.println("Tc girin: ");
+        String tcNumber = scanner.nextLine();
+
+        System.out.println("Telefon girin: ");
+        String phoneNumber = scanner.nextLine();
+        
+        User user = new User(name, surName, tcNumber, phoneNumber);
+        try {
+            userService.registerUser(user);
+            System.out.println("Kullanıcı kaydedildi!");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Hata: " + e.getMessage());
+        }
+
     }
     
 }
