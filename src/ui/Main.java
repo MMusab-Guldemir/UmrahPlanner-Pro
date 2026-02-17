@@ -1,4 +1,5 @@
 package src.ui;
+import src.model.Hotel;
 import src.model.User;
 import src.service.BookingService;
 import src.service.FlightService;
@@ -196,6 +197,72 @@ public class Main {
     }
 
     public void addHotel() {
-        
+        scanner.nextLine();
+        System.out.println("Otel adı: ");
+        String hotelName = scanner.nextLine();
+
+        System.out.println("Şehir (Mekke/Medine): ");
+        String city = scanner.nextLine();
+
+        System.out.println("Yıldız (1-5): ");
+        int stars = scanner.nextInt();
+
+        System.out.println("Oda tipi: ");
+        String roomType = scanner.nextLine();
+
+        System.out.println("Gecelik fiyat: ");
+        double perNightFee = scanner.nextDouble();
+
+        Hotel hotel = new Hotel(hotelName, city, stars, roomType, perNightFee);
+        try {
+            hotelService.addHotel(hotel);
+            System.out.println("Otel eklendi");
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void listAllHotels() {
+        List<Hotel> hotels = hotelService.getAllHotels();
+
+        if (hotels == null) {
+            System.out.println("Kayıtlı otel yok");
+        }
+
+        for (Hotel hotel : hotels) {
+            System.out.println(hotel.getHotelName() + " | " + hotel.getCity() + " | " + hotel.getStarDisplay());
+        }
+    }
+
+    public void searchHotelByCity() {
+        scanner.nextLine();
+        System.out.println("Şehir girin (Mekke/Medine): ");
+        String city = scanner.nextLine();
+
+        List<Hotel> hotels = hotelService.findByCity(city);
+
+        if (hotels == null) {
+            System.out.println("Otel bulunamadı");
+        }
+
+        for (Hotel hotel : hotels) {
+            System.out.println(hotel.getHotelName() + " | " + hotel.getCity() + " | " + hotel.getStarDisplay());
+        }
+    }
+
+    public void searchHotelByStars() {
+        scanner.nextLine();
+        System.out.println("Yıldız sayısı (1-5): ");
+        int stars = scanner.nextInt();
+
+        List<Hotel> hotels = hotelService.findByStars(stars); 
+
+        if (hotels == null) {
+            System.out.println("Otel bulunamadı");
+        }
+
+        for (Hotel hotel : hotels) {
+            System.out.println(hotel.getHotelName() + " | " + hotel.getCity() + " | " + hotel.getStarDisplay());
+        }
     }
 }
