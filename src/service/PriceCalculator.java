@@ -17,17 +17,18 @@ public class PriceCalculator {
 
     public static double calculateFlightCost(Flight flight, int travelers) {
         if (flight == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Flight cannot be null"
+);
         }
         if (travelers < 1) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Travelers must be at least 1");
         }
         return flight.getPrice() * travelers;
     }
 
     public static double calculateHotelCost(Hotel hotel, int travelers) {
         if (hotel == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Hotel cannot be null");
         }
 
         return hotel.getTotalPrice() * travelers;
@@ -56,7 +57,7 @@ public class PriceCalculator {
 
     public static double calculatePackagePrice(UmrahPackage pkg, int travelers) {
         if (pkg == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Package cannot be null");
         }
 
         double multiplier = ECONOMY_MULTIPLIER;
@@ -73,7 +74,7 @@ public class PriceCalculator {
 
     public static double calculateTotalBookingPrice(Booking booking) {
         if (booking == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Booking cannot be null");
         }
         double total = 0.0;
         int travelers = booking.getNumberOfTravelers();
@@ -109,6 +110,10 @@ public class PriceCalculator {
     }
 
     public static double applyDiscount(double totalPrice, User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("User cannot be null");
+        }
+
         if (user.getPreviousUmrahCount() >= 3) {
             return totalPrice * 0.90;
         }
