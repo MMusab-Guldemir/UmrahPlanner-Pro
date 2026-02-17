@@ -166,6 +166,36 @@ public class Main {
         }
     }
 
+    // ===================================================================================================================
 
-    
+    public void showHotelMenu() {
+        System.out.println("1. Yeni Otel Ekle\n" + 
+                        "   2. Tüm Otelleri Listele\n" + 
+                        "   3. Şehre Göre Ara\n" + 
+                        "   4. Yıldıza Göre Ara\n" + 
+                        "   5. Ana Menüye Dön");
+
+        int choice = scanner.nextInt();
+
+        switch (choice) {
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                break;
+
+            case 5:
+                break;
+        }
+    }
+
+    public void addHotel() {
+        
+    }
 }
