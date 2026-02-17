@@ -34,21 +34,21 @@ public class PriceCalculator {
     }
 
     public static double calculateGuideFee(int duration, boolean hasGuide) {
-        if (hasGuide == false) {
+        if (!hasGuide) {
             return 0;
         }
         return GUIDE_FEE_PER_DAY * duration; 
     }
 
     public static double calculateVisaFee(int travelers, boolean hasVisa) {
-        if (hasVisa == false) {
+        if (!hasVisa) {
             return 0;
         } 
         return VISA_FEE * travelers;
     }
 
     public static double calculateInsuranceFee(int travelers, boolean hasInsurance) {
-        if (hasInsurance == false) {
+        if (!hasInsurance) {
             return 0;
         }
         return INSURANCE_FEE * travelers;
@@ -66,7 +66,7 @@ public class PriceCalculator {
         } else if (pkg.getPackageType().equals("Premium")) {
             multiplier = PREMIUM_MULTIPLIER;
         }
-        
+
         return pkg.getBasePrice() * travelers * multiplier;
            
     }
