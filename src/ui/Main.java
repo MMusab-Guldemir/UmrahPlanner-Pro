@@ -4,6 +4,8 @@ import src.service.BookingService;
 import src.service.FlightService;
 import src.service.HotelService;
 import src.service.UserService;
+
+import java.util.List;
 import java.util.Scanner;
 public class Main {
     private UserService userService;
@@ -90,6 +92,7 @@ public class Main {
     }
 
     public void addUser() {
+        scanner.nextLine();
         System.out.println("Ad girin: ");
         String name = scanner.nextLine();
 
@@ -109,7 +112,60 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println("Hata: " + e.getMessage());
         }
-
     }
+
+    public void listAllUsers() {
+        try {
+            List<User> list = userService.getAllUsers();
+
+            if (list.isEmpty()) {
+                System.out.println("Kayıtlı Kullanıcı yok");
+                return;
+            }
+
+            for (User user : list) {
+                System.out.println(user.getFullName()+ " | " + user.getTcNumber() + " | " + user.getPhoneNumber());
+            } 
+        } catch (Exception e) {
+            System.out.println("Hata: " + e.getMessage());
+        }
+    }
+
+    public void searchUserByTc() {
+        scanner.nextLine();
+        System.out.println("Tc girin: ");
+        String tcNumber = scanner.nextLine();
+        try {
+            User user = userService.findByTcNumber(tcNumber);
+
+            if(user == null) {
+                System.out.println("Kullanıcı bulunamadı");
+            }
+
+            System.out.println(user.getFullName() + " | " + user.getTcNumber() + " | " + user.getPhoneNumber());
+        } catch (Exception e) {
+            System.out.println("Hata: " + e.getMessage());
+        }
+    }
+
+    public void deleteUser() {
+        scanner.nextLine();
+        System.out.println("Silinecek kullanıcı TC girin: ");
+        String tcNumber = scanner.nextLine();
+
+        try {
+            User user = userService.findByTcNumber(tcNumber);
+            
+            if (user == null) {
+                System.out.println("Kullanıcı bulunamadı");
+            }
+
+            System.out.println(user.getFullName() + " | " + user.getTcNumber() + " | " + user.getPhoneNumber());
+        } catch (Exception e) {
+            System.out.println("Hata: " + e.getMessage());
+        }
+    }
+
+
     
 }
