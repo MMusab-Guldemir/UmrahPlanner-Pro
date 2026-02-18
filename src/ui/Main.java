@@ -1,4 +1,5 @@
 package src.ui;
+import src.model.Flight;
 import src.model.Hotel;
 import src.model.User;
 import src.service.BookingService;
@@ -184,17 +185,17 @@ public class Main {
 
         switch (choice) {
             case 1:
+                addHotel();
                 break;
-
             case 2:
+                listAllHotels();
                 break;
-
             case 3:
+                searchHotelByCity();
                 break;
-
             case 4:
+                searchHotelByStars();
                 break;
-
             case 5:
                 break;
         }
@@ -268,6 +269,99 @@ public class Main {
 
         for (Hotel hotel : hotels) {
             System.out.println(hotel.getHotelName() + " | " + hotel.getCity() + " | " + hotel.getStarDisplay());
+        }
+    }
+
+    // ===================================================================================================================
+
+    public void showFlightMenu() {
+        System.out.println("1. Yeni Uçuş Ekle\n" + 
+                        "   2. Tüm Uçuşları Listele\n" + 
+                        "   3. Havayoluna Göre Ara\n" + 
+                        "   4. Müsait Uçuşları Göster\n" + 
+                        "   5. Ana Menüye Dön");
+
+        int choice = scanner.nextInt();
+
+        switch (choice) {
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                break;
+
+            case 5:
+                break;
+        }
+    }
+
+    public void addFlight() {
+        scanner.nextLine();
+        System.out.println("Uçuş numarası: ");
+        String flightNo = scanner.nextLine();
+        
+        System.out.println("Havayolu: ");
+        String airline = scanner.nextLine();
+
+        System.out.println("Sınıf (Economy/Business): ");
+        String flightType = scanner.nextLine();
+
+        System.out.println("Fiyat: ");
+        double price = scanner.nextDouble();
+        try {
+            Flight flight = new Flight(flightNo, airline, flightType, price);
+
+            flightService.addFlight(flight);
+
+            System.out.println("Uçuş eklendi!");
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void listAllFlights() {
+        List<Flight> flights = flightService.getAllflights();
+
+        if (flights.isEmpty()) {
+            System.out.println("Kayıtlı uçuş yok");
+        }
+
+        for (Flight flight : flights) {
+            flight.getFlightSummary();
+        }
+    }
+
+    public void searchByAirline() {
+        scanner.nextLine();
+        System.out.println("Havayolu girin: ");
+        String airline = scanner.nextLine();
+
+        List<Flight> flights = flightService.findByAirline(airline);
+
+        if (flights.isEmpty()) {
+            System.out.println("Uçuş bulunamadı");
+        }
+
+        for (Flight flight : flights) {
+            System.out.println(flight.getAirline());
+        }
+    }
+
+    public void showAvailableFlights() {
+        List<Flight> flights = flightService.getAvailableFlights();
+
+        if (flights.isEmpty()) {
+            System.out.println("Müsait uçuş yok");
+        }
+
+        for (Flight flight : flights) {
+            System.out.println(flight.getAvailableSeats());
         }
     }
 }
