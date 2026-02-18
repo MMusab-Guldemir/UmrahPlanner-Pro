@@ -54,14 +54,14 @@ public class Main {
                 showUserMenu();
                 break;
             case 2:
+                showHotelMenu();
                 break;
-
             case 3:
+                showHotelMenu();
                 break;
-
             case 4:
+                showBookingMenu();
                 break;
-
             case 5:
                 System.exit(0);
                 break;
@@ -79,17 +79,17 @@ public class Main {
 
         switch (choice) {
             case 1:
+                addUser();
                 break;
-
             case 2:
+                listAllUsers();
                 break;
-
             case 3:
+                searchUserByTc();
                 break;
-
             case 4:
+                deleteUser();
                 break;
-
             case 5:
                 break;
         }
@@ -396,6 +396,7 @@ public class Main {
 
         switch (choice) {
             case 1:
+                createNewBooking();
                 break;
             case 2:
                 break;
@@ -443,5 +444,9 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Hata: " + e.getMessage());
         }
+    }
+
+    public void listAllBookings() {
+
     }
 }
