@@ -399,12 +399,18 @@ public class Main {
                 createNewBooking();
                 break;
             case 2:
+                listAllBookings();
                 break;
             case 3:
+                searchBookingById();
                 break;
             case 4:
+                confirmBooking();
                 break;
             case 5:
+                cancelBooking();
+                break;
+            case 6:
                 break;
         }
     }
@@ -447,6 +453,52 @@ public class Main {
     }
 
     public void listAllBookings() {
+        List<Booking> bookings = bookingService.getAllBookings();
 
+        if (bookings.isEmpty()) {
+            System.out.println("Kayıtlı rezervasyon yok");
+            return;
+        }
+
+        for (Booking booking : bookings) {
+            booking.getBookingSummary();
+        }
+    }
+
+    public void searchBookingById() {
+        scanner.nextLine();
+        try {
+            System.out.println("Rezervasyon ID: ");
+            String Id = scanner.nextLine();
+            Booking booking = bookingService.getBookingById(Id);
+            bookingService.getBookingById(Id);
+            System.out.println();
+        } catch (Exception e) {
+            System.out.println("Hata: " + e.getMessage());
+        }
+    }
+
+    public void confirmBooking() {
+        scanner.nextLine();
+        try {
+            System.out.println("Onaylanacak rezervasyon ID: ");
+            String Id = scanner.nextLine();
+            bookingService.confirmBooking(Id);
+            System.out.println("Rezervasyon onaylandı!");
+        } catch (Exception e) {
+            System.out.println("Hata: " + e.getMessage());
+        }
+    }
+
+    public void cancelBooking() {
+        scanner.nextLine();
+        try {
+            System.out.println("İptal edilecek rezervasyon ID: ");
+            String Id = scanner.nextLine();
+            bookingService.cancelBooking(Id);
+            System.out.println("Rezervasyon iptal edildi!");
+        } catch (Exception e) {
+            System.out.println("Hata: " + e.getMessage());
+        }
     }
 }
