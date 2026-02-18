@@ -285,17 +285,17 @@ public class Main {
 
         switch (choice) {
             case 1:
+                addFlight();
                 break;
-
             case 2:
+                listAllFlights();
                 break;
-
             case 3:
+                searchByAirline();
                 break;
-
             case 4:
+                showAvailableFlights();
                 break;
-
             case 5:
                 break;
         }
@@ -321,19 +321,25 @@ public class Main {
 
             System.out.println("Uçuş eklendi!");
         } catch (Exception e) {
-
+            System.out.println("Hata: " + e.getMessage());
         }
     }
 
     public void listAllFlights() {
-        List<Flight> flights = flightService.getAllflights();
+        try {
 
-        if (flights.isEmpty()) {
-            System.out.println("Kayıtlı uçuş yok");
-        }
+            List<Flight> flights = flightService.getAllflights();
 
-        for (Flight flight : flights) {
-            flight.getFlightSummary();
+            if (flights.isEmpty()) {
+                System.out.println("Kayıtlı uçuş yok");
+                return;
+            }
+
+            for (Flight flight : flights) {
+                System.out.println(flight.getFlightSummary());
+            }
+        } catch (Exception e) {
+            System.out.println("Hata: " + e.getMessage());
         }
     }
 
@@ -341,27 +347,36 @@ public class Main {
         scanner.nextLine();
         System.out.println("Havayolu girin: ");
         String airline = scanner.nextLine();
+        try {
+            List<Flight> flights = flightService.findByAirline(airline);
 
-        List<Flight> flights = flightService.findByAirline(airline);
+            if (flights.isEmpty()) {
+                System.out.println("Uçuş bulunamadı");
+                return;
+            }
 
-        if (flights.isEmpty()) {
-            System.out.println("Uçuş bulunamadı");
-        }
-
-        for (Flight flight : flights) {
-            System.out.println(flight.getAirline());
+            for (Flight flight : flights) {
+                System.out.println(flight.getFlightSummary());
+            }
+        } catch (Exception e) {
+            System.out.println("Hata: " + e.getMessage());
         }
     }
 
     public void showAvailableFlights() {
-        List<Flight> flights = flightService.getAvailableFlights();
+        try {
+            List<Flight> flights = flightService.getAvailableFlights();
 
-        if (flights.isEmpty()) {
-            System.out.println("Müsait uçuş yok");
-        }
+            if (flights.isEmpty()) {
+                System.out.println("Müsait uçuş yok");
+                return;
+            }
 
-        for (Flight flight : flights) {
-            System.out.println(flight.getAvailableSeats());
+            for (Flight flight : flights) {
+                System.out.println(flight.getAvailableSeats());
+            }
+        } catch (Exception e) {
+            System.out.println("Hata: " + e.getMessage());
         }
     }
 }
