@@ -106,8 +106,8 @@ public class Main {
         System.out.println("Telefon girin: ");
         String phoneNumber = scanner.nextLine();
         
-        User user = new User(name, surName, tcNumber, phoneNumber);
         try {
+            User user = new User(name, surName, tcNumber, phoneNumber);
             userService.registerUser(user);
             System.out.println("Kullanıcı kaydedildi!");
         } catch (IllegalArgumentException e) {
@@ -141,6 +141,7 @@ public class Main {
 
             if(user == null) {
                 System.out.println("Kullanıcı bulunamadı");
+                return;
             }
 
             System.out.println(user.getFullName() + " | " + user.getTcNumber() + " | " + user.getPhoneNumber());
@@ -159,7 +160,10 @@ public class Main {
             
             if (user == null) {
                 System.out.println("Kullanıcı bulunamadı");
+                return;
             }
+
+            userService.deleteUser(user.getUserId());
 
             System.out.println(user.getFullName() + " | " + user.getTcNumber() + " | " + user.getPhoneNumber());
         } catch (Exception e) {
@@ -206,6 +210,7 @@ public class Main {
 
         System.out.println("Yıldız (1-5): ");
         int stars = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.println("Oda tipi: ");
         String roomType = scanner.nextLine();
@@ -225,7 +230,7 @@ public class Main {
     public void listAllHotels() {
         List<Hotel> hotels = hotelService.getAllHotels();
 
-        if (hotels == null) {
+        if (hotels.isEmpty()) {
             System.out.println("Kayıtlı otel yok");
         }
 
