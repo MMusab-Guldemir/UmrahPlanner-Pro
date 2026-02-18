@@ -29,7 +29,7 @@ public class FlightService {
         flightDAO.update(flight);
     } 
 
-    public void deleteFlight(String id ){
+    public void deleteFlight(String id){
         if (id == null || id.trim().isEmpty()) {
             throw new IllegalArgumentException("Flight ID cannot be null or empty");
         }
@@ -45,7 +45,7 @@ public class FlightService {
         return flightDAO.getAll();
     }
 
-    public Flight getById(String id) {
+    public Flight getFlightById(String id) {
         Flight existing = flightDAO.getById(id);
         if (existing == null) {
             throw new IllegalArgumentException("Flight not found with id: " + id); 

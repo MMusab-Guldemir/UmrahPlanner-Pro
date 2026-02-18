@@ -1,4 +1,5 @@
 package src.ui;
+import src.model.Booking;
 import src.model.Flight;
 import src.model.Hotel;
 import src.model.User;
@@ -7,6 +8,7 @@ import src.service.FlightService;
 import src.service.HotelService;
 import src.service.UserService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 public class Main {
@@ -95,16 +97,16 @@ public class Main {
 
     public void addUser() {
         scanner.nextLine();
-        System.out.println("Ad girin: ");
+        System.out.print("Ad girin: ");
         String name = scanner.nextLine();
 
-        System.out.println("Soyad girin: ");
+        System.out.print("Soyad girin: ");
         String surName = scanner.nextLine();
 
-        System.out.println("Tc girin: ");
+        System.out.print("Tc girin: ");
         String tcNumber = scanner.nextLine();
 
-        System.out.println("Telefon girin: ");
+        System.out.print("Telefon girin: ");
         String phoneNumber = scanner.nextLine();
         
         try {
@@ -135,7 +137,7 @@ public class Main {
 
     public void searchUserByTc() {
         scanner.nextLine();
-        System.out.println("Tc girin: ");
+        System.out.print("Tc girin: ");
         String tcNumber = scanner.nextLine();
         try {
             User user = userService.findByTcNumber(tcNumber);
@@ -153,7 +155,7 @@ public class Main {
 
     public void deleteUser() {
         scanner.nextLine();
-        System.out.println("Silinecek kullanıcı TC girin: ");
+        System.out.print("Silinecek kullanıcı TC girin: ");
         String tcNumber = scanner.nextLine();
 
         try {
@@ -203,20 +205,20 @@ public class Main {
 
     public void addHotel() {
         scanner.nextLine();
-        System.out.println("Otel adı: ");
+        System.out.print("Otel adı: ");
         String hotelName = scanner.nextLine();
 
-        System.out.println("Şehir (Mekke/Medine): ");
+        System.out.print("Şehir (Mekke/Medine): ");
         String city = scanner.nextLine();
 
-        System.out.println("Yıldız (1-5): ");
+        System.out.print("Yıldız (1-5): ");
         int stars = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.println("Oda tipi: ");
+        System.out.print("Oda tipi: ");
         String roomType = scanner.nextLine();
 
-        System.out.println("Gecelik fiyat: ");
+        System.out.print("Gecelik fiyat: ");
         double perNightFee = scanner.nextDouble();
 
         Hotel hotel = new Hotel(hotelName, city, stars, roomType, perNightFee);
@@ -242,7 +244,7 @@ public class Main {
 
     public void searchHotelByCity() {
         scanner.nextLine();
-        System.out.println("Şehir girin (Mekke/Medine): ");
+        System.out.print("Şehir girin (Mekke/Medine): ");
         String city = scanner.nextLine();
 
         List<Hotel> hotels = hotelService.findByCity(city);
@@ -258,7 +260,7 @@ public class Main {
 
     public void searchHotelByStars() {
         scanner.nextLine();
-        System.out.println("Yıldız sayısı (1-5): ");
+        System.out.print("Yıldız sayısı (1-5): ");
         int stars = scanner.nextInt();
 
         List<Hotel> hotels = hotelService.findByStars(stars); 
@@ -303,16 +305,16 @@ public class Main {
 
     public void addFlight() {
         scanner.nextLine();
-        System.out.println("Uçuş numarası: ");
+        System.out.print("Uçuş numarası: ");
         String flightNo = scanner.nextLine();
         
-        System.out.println("Havayolu: ");
+        System.out.print("Havayolu: ");
         String airline = scanner.nextLine();
 
-        System.out.println("Sınıf (Economy/Business): ");
+        System.out.print("Sınıf (Economy/Business): ");
         String flightType = scanner.nextLine();
 
-        System.out.println("Fiyat: ");
+        System.out.print("Fiyat: ");
         double price = scanner.nextDouble();
         try {
             Flight flight = new Flight(flightNo, airline, flightType, price);
@@ -345,7 +347,7 @@ public class Main {
 
     public void searchByAirline() {
         scanner.nextLine();
-        System.out.println("Havayolu girin: ");
+        System.out.print("Havayolu girin: ");
         String airline = scanner.nextLine();
         try {
             List<Flight> flights = flightService.findByAirline(airline);
@@ -405,5 +407,41 @@ public class Main {
                 break;
         }
     }
-    
+
+    public void createNewBooking() {
+        scanner.nextLine();
+        try {
+            System.out.print("Kullanıcı TC: ");
+            String tcNumber = scanner.nextLine();
+            User user = userService.findByTcNumber(tcNumber);
+            if (user == null) {
+                System.out.println("Kullanıcı bulunamadı");
+                return;
+            }
+
+            System.out.println("Kişi sayısı: ");
+            int travelers = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.print("Seyahat tarihi (YYYY-MM-DD): ");
+            String dateRange = scanner.nextLine();
+            LocalDate travelDate = LocalDate.parse(dateRange);
+
+            listAllFlights();
+            System.out.print("Gidiş uçuşu ID: ");
+            String outboundID = scanner.nextLine();
+            Flight outboundFlight = flightService.getFlightById(outboundID);
+
+            listAllHotels();
+            System.out.print("Mekke Hotel ID: ");
+            String makkahHotel = scanner.nextLine();
+            Hotel makkah = hotelService.getHotelById(makkahHotel);
+        
+            Booking booking = new Booking(user, travelers, travelDate, outboundFlight, null, makkah, null);
+            bookingService.createBooking(booking);
+            System.out.println("Rezervasyon oluşturuldu! Toplam: " + booking.getTotalPrice());
+        } catch (Exception e) {
+            System.out.println("Hata: " + e.getMessage());
+        }
+    }
 }
