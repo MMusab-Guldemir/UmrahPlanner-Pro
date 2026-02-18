@@ -41,7 +41,7 @@ public class FlightService {
         flightDAO.delete(id);
     }
 
-    public List<Flight> getAllflights() {
+    public List<Flight> getAllFlights() {
         return flightDAO.getAll();
     }
 

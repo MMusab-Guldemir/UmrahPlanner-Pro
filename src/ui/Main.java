@@ -328,7 +328,7 @@ public class Main {
     public void listAllFlights() {
         try {
 
-            List<Flight> flights = flightService.getAllflights();
+            List<Flight> flights = flightService.getAllFlights();
 
             if (flights.isEmpty()) {
                 System.out.println("Kayıtlı uçuş yok");
@@ -373,10 +373,37 @@ public class Main {
             }
 
             for (Flight flight : flights) {
-                System.out.println(flight.getAvailableSeats());
+                System.out.println(flight.getFlightSummary() + " | Koltuk: " + flight.getAvailableSeats());
             }
         } catch (Exception e) {
             System.out.println("Hata: " + e.getMessage());
         }
     }
+
+    // =============================================================================================================================
+
+    public void showBookingMenu() {
+        System.out.println("1. Yeni Rezarvasyon Oluştur\n" + 
+                        "   2. Tüm Rezarvasyonlları Listele\n" + 
+                        "   3. Rezarvasyon Ara (ID ile)\n" + 
+                        "   4. Rezarvasyon Onayla\n" +
+                        "   5. Rezarvasyon İptal Et \n"+ 
+                        "   6. Ana Menüye Dön");
+
+        int choice = scanner.nextInt();
+
+        switch (choice) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+        }
+    }
+    
 }
