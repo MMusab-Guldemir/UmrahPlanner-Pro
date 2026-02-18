@@ -57,7 +57,7 @@ public class Main {
                 showHotelMenu();
                 break;
             case 3:
-                showHotelMenu();
+                showFlightMenu();
                 break;
             case 4:
                 showBookingMenu();
@@ -220,13 +220,12 @@ public class Main {
 
         System.out.print("Gecelik fiyat: ");
         double perNightFee = scanner.nextDouble();
-
-        Hotel hotel = new Hotel(hotelName, city, stars, roomType, perNightFee);
         try {
+            Hotel hotel = new Hotel(hotelName, city, stars, roomType, perNightFee);
             hotelService.addHotel(hotel);
             System.out.println("Otel eklendi");
         } catch (Exception e) {
-
+            System.out.println("Hata: " + e.getMessage());
         }
     }
 
@@ -235,6 +234,7 @@ public class Main {
 
         if (hotels.isEmpty()) {
             System.out.println("Kayıtlı otel yok");
+            return;
         }
 
         for (Hotel hotel : hotels) {
@@ -249,8 +249,9 @@ public class Main {
 
         List<Hotel> hotels = hotelService.findByCity(city);
 
-        if (hotels == null) {
+        if (hotels.isEmpty()) {
             System.out.println("Otel bulunamadı");
+            return;
         }
 
         for (Hotel hotel : hotels) {
@@ -265,8 +266,9 @@ public class Main {
 
         List<Hotel> hotels = hotelService.findByStars(stars); 
 
-        if (hotels == null) {
+        if (hotels.isEmpty()) {
             System.out.println("Otel bulunamadı");
+            return;
         }
 
         for (Hotel hotel : hotels) {
@@ -385,11 +387,11 @@ public class Main {
     // =============================================================================================================================
 
     public void showBookingMenu() {
-        System.out.println("1. Yeni Rezarvasyon Oluştur\n" + 
-                        "   2. Tüm Rezarvasyonlları Listele\n" + 
-                        "   3. Rezarvasyon Ara (ID ile)\n" + 
-                        "   4. Rezarvasyon Onayla\n" +
-                        "   5. Rezarvasyon İptal Et \n"+ 
+        System.out.println("1. Yeni Rezervasyon Oluştur\n" + 
+                        "   2. Tüm Rezervasyonları Listele\n" + 
+                        "   3. Rezervasyon Ara (ID ile)\n" + 
+                        "   4. Rezervasyon Onayla\n" +
+                        "   5. Rezervasyon İptal Et \n"+ 
                         "   6. Ana Menüye Dön");
 
         int choice = scanner.nextInt();
@@ -461,7 +463,7 @@ public class Main {
         }
 
         for (Booking booking : bookings) {
-            booking.getBookingSummary();
+            System.out.println(booking.getBookingSummary());
         }
     }
 
@@ -471,8 +473,7 @@ public class Main {
             System.out.println("Rezervasyon ID: ");
             String Id = scanner.nextLine();
             Booking booking = bookingService.getBookingById(Id);
-            bookingService.getBookingById(Id);
-            System.out.println();
+            System.out.println(booking.getBookingSummary());
         } catch (Exception e) {
             System.out.println("Hata: " + e.getMessage());
         }
